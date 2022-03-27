@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,7 +18,20 @@ public class UsersController {
 
     @RequestMapping("/users")
     @ResponseBody
-    public Object index() {
+    public Object users() {
         return users;
+    }
+
+    @RequestMapping("/users/{id}/get")
+    @ResponseBody
+    public Object getUser(@PathVariable int id) {
+        return users.get(id);
+    }
+
+    @RequestMapping("/users/{id}/remove")
+    @ResponseBody
+    public String removeUser(@PathVariable int id) {
+        users.remove(id);
+        return "User deleted";
     }
 }
