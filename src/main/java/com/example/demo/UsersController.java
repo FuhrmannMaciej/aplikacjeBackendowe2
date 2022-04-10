@@ -21,7 +21,7 @@ public class UsersController {
     @RequestMapping("/users")
     @ResponseBody
     public Object users() {
-        return users;
+        return users.values();
     }
 
     @RequestMapping("/users/{id}/get")
