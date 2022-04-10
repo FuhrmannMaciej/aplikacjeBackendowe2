@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 
 @Controller
 public class UsersController {
 
-    private Map<Integer, UserEntity> users = new HashMap<>(){{
+    private TreeMap<Integer, UserEntity> users = new TreeMap<>(){{
                         put(1,new UserEntity("john", 21));
                         put(2,new UserEntity("tom", 18));
                         put(3,new UserEntity("paul", 42));
@@ -41,8 +40,7 @@ public class UsersController {
     @RequestMapping("/users/add")
     @ResponseBody
     public Object addUser(@RequestParam String name, @RequestParam int age) {
-        int size = users.size() + 1;
-        users.put(size, new UserEntity(name, age));
-        return users.get(size);
+        users.put(users.lastKey() + 1, new UserEntity(name, age));
+        return users.get(users.lastKey());
     }
 }
